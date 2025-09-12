@@ -5,8 +5,12 @@ public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager instance;
     public TMP_Text scoreText;
+    public TMP_Text highScoreText; // Nuevo campo para mostrar High Score
 
     private int score = -1;
+    private int highScore = 0;
+
+    private const string HighScoreKey = "HighScore";
 
     private void Awake()
     {
@@ -14,6 +18,9 @@ public class ScoreManager : MonoBehaviour
             instance = this;
         else
             Destroy(gameObject);
+
+        // Cargar High Score guardado
+        highScore = PlayerPrefs.GetInt(HighScoreKey, 0);
     }
 
     private void Start()
@@ -25,6 +32,14 @@ public class ScoreManager : MonoBehaviour
     {
         score += value;
         UpdateUI();
+
+        // Revisar si hay nuevo High Score
+        if (score > highScore)
+        {
+            highScore = score;
+            PlayerPrefs.SetInt(HighScoreKey, highScore);
+            PlayerPrefs.Save();
+        }
     }
 
     public void ResetScore()
@@ -37,5 +52,8 @@ public class ScoreManager : MonoBehaviour
     {
         if (scoreText != null)
             scoreText.text = "Score: " + score;
+
+        if (highScoreText != null)
+            highScoreText.text = "High Score: " + highScore;
     }
 }

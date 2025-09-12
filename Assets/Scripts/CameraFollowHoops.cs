@@ -2,7 +2,7 @@
 
 public class CameraFollowHoops : MonoBehaviour
 {
-    public HoopSpawner spawner; // referencia al spawner
+    public HoopSpawner spawner;
     public Camera cam;
 
     [Header("Movimiento")]
@@ -14,11 +14,9 @@ public class CameraFollowHoops : MonoBehaviour
 
     [Header("Ajustes Manuales")]
     public Vector3 offset = new Vector3(0, 2, -10);
-    // 🔥 offset relativo al punto medio de los aros
-    // Ej: (0, 2, -10) → 2 unidades arriba y 10 detrás en Z
-
     public Vector3 rotationOffset = Vector3.zero;
-    // 🔥 rotación adicional manual (en grados)
+
+    private Vector3 smoothedMiddle;
 
     private void LateUpdate()
     {
@@ -28,26 +26,20 @@ public class CameraFollowHoops : MonoBehaviour
         Transform current = spawner.CurrentHoop.transform;
         Transform next = spawner.NextHoop.transform;
 
-        // Punto medio entre ambos aros
+        //transición entre aros
         Vector3 middlePoint = (current.position + next.position) / 2f;
+        smoothedMiddle = Vector3.Lerp(smoothedMiddle, middlePoint, smoothSpeed * Time.deltaTime);
 
-        // Distancia entre ellos
         float distance = Vector3.Distance(current.position, next.position);
 
-        // Posición deseada con offset configurable
-        Vector3 desiredPos = middlePoint + offset;
-        desiredPos.z -= distance * 0.5f; // retrocede más si hay más distancia
+        Vector3 desiredPos = smoothedMiddle + offset;
+        desiredPos.z -= distance * 0.5f;
 
-        // Suavizado
         transform.position = Vector3.Lerp(transform.position, desiredPos, smoothSpeed * Time.deltaTime);
 
-        // Mirar al centro
-        transform.LookAt(middlePoint);
-
-        // Aplicar rotación adicional manual
+        transform.LookAt(smoothedMiddle);
         transform.rotation *= Quaternion.Euler(rotationOffset);
 
-        // Ajustar FOV (zoom dinámico)
         float targetFOV = Mathf.Clamp(distance * 10f + extraPadding, 40f, 80f);
         cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, targetFOV, smoothSpeed * Time.deltaTime);
     }

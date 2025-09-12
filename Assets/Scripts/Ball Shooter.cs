@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.InputSystem; // ✅ New Input System
+using UnityEngine.InputSystem; 
 
 [RequireComponent(typeof(Rigidbody))]
 public class BallShooter : MonoBehaviour
@@ -31,7 +31,7 @@ public class BallShooter : MonoBehaviour
             cam = Camera.main;
             if (cam == null)
             {
-                Debug.LogError("❌ No hay cámara asignada en BallShooter y tampoco se encontró 'MainCamera'.");
+                Debug.LogError("No hay cámara asignada en BallShooter y tampoco se encontró 'MainCamera'.");
             }
         }
 
@@ -51,7 +51,7 @@ public class BallShooter : MonoBehaviour
 
     private void Update()
     {
-        // ✅ Mouse / Touch press
+        // Mouse / Touch press
         if ((Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame) ||
             (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame))
         {
@@ -59,7 +59,7 @@ public class BallShooter : MonoBehaviour
             startDragPos = GetPointerPosition();
         }
 
-        // ✅ Mouse / Touch hold
+        // Mouse / Touch hold
         if (isDragging &&
             ((Mouse.current != null && Mouse.current.leftButton.isPressed) ||
              (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed)))
@@ -68,7 +68,7 @@ public class BallShooter : MonoBehaviour
             ShowTrajectory();
         }
 
-        // ✅ Mouse / Touch release
+        // Mouse / Touch release
         if (isDragging &&
             ((Mouse.current != null && Mouse.current.leftButton.wasReleasedThisFrame) ||
              (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasReleasedThisFrame)))
@@ -119,7 +119,7 @@ public class BallShooter : MonoBehaviour
     {
         if (cam == null)
         {
-            Debug.LogError("⚠️ No hay cámara asignada en BallShooter.");
+            Debug.LogError("No hay cámara asignada en BallShooter.");
             return Vector3.zero;
         }
 

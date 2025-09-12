@@ -6,8 +6,8 @@ public class DeathZoneFollow : MonoBehaviour
     public Transform hoop2;
 
     [Header("Offset")]
-    public float yOffset = -5f; // Qué tan abajo respecto al promedio de los aros
-    public float zOffset = 0f;  // Por si quieres moverlo un poco hacia adelante
+    public float yOffset = -5f; // offset en y para colocar el cubo invisible debajo
+    public float zOffset = 0f;  //offset en z si es necesario
 
     void Update()
     {

@@ -66,7 +66,7 @@ public class HoopSpawner : MonoBehaviour
         InitHoops();
     }
 
-    // ✅ Propiedades públicas para la cámara
+    // Propiedades públicas para la cámara
     public HoopController CurrentHoop => currentHoop;
     public HoopController NextHoop => nextHoop;
 }
