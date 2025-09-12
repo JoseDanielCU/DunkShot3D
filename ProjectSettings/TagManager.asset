@@ -7,6 +7,7 @@ TagManager:
   - Ball
   - Hoop
   - DeathZone
+  - Net
   layers:
   - Default
   - TransparentFX

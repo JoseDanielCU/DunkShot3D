@@ -2,6 +2,7 @@
 
 public class HoopController : MonoBehaviour
 {
+
     [Header("Disparo")]
     public Transform shootPoint;   // Posición desde donde se disparará
     public float shootForce = 10f;
@@ -31,18 +32,19 @@ public class HoopController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (scored) return; // evitar que sume más de una vez
-        if (other.CompareTag("Ball"))
-        {
-            scored = true;
+        if (scored) return;
+        if (!other.CompareTag("Ball")) return;
 
-            // 🔥 Sumar score
-            ScoreManager.instance.AddScore(1);
+        scored = true;
 
-            // 🔥 Avisar al spawner
-            HoopSpawner spawner = FindAnyObjectByType<HoopSpawner>();
-            if (spawner != null)
-                spawner.OnBallScored(this);
-        }
+        // Sumar score y mostrar popup
+        int points = 1; // o calcula según net/hoop más adelante
+        ScoreManager.instance.AddScore(points, transform.position);
+
+        // Avisar al spawner
+        HoopSpawner spawner = FindAnyObjectByType<HoopSpawner>();
+        if (spawner != null)
+            spawner.OnBallScored(this);
     }
+
 }
