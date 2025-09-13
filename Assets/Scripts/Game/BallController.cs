@@ -1,9 +1,9 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
     [Header("Game Over")]
-    public float minY = -5f; // límite de altura para perder
+    public float minY = -5f; // lÃ­mite de altura para perder
 
     private Rigidbody rb;
 
@@ -25,7 +25,7 @@ public class BallController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Entró en trigger con: " + other.name);
+        Debug.Log("EntrÃ³ en trigger con: " + other.name);
 
         if (other.CompareTag("Hoop"))
         {
@@ -41,24 +41,21 @@ public class BallController : MonoBehaviour
 
     private void GameOver()
     {
-        Debug.Log("Game Over! La pelota cayó al vacío.");
+        Debug.Log("Game Over! La pelota cayÃ³ al vacÃ­o.");
 
-        // Resetear score
         ScoreManager.instance.ResetScore();
 
-        // Reiniciar los aros
         HoopSpawner spawner = Object.FindAnyObjectByType<HoopSpawner>();
         if (spawner != null)
-        {
             spawner.ResetHoops();
-        }
 
-        // Resetear físicas de la pelota
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         rb.isKinematic = true;
 
-        // Volver al aro inicial
-        transform.position = new Vector3(0, 2, 0);
+        transform.position = new Vector3(0, 1.7f, 0);
+
+        // Volver a permitir disparar
+        FindAnyObjectByType<BallShooter>().canShoot = true;
     }
 }

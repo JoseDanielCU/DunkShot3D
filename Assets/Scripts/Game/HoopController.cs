@@ -33,18 +33,32 @@ public class HoopController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (scored) return;
-        if (!other.CompareTag("Ball")) return;
+        if (other.CompareTag("Ball"))
+        {
+            scored = true;
 
-        scored = true;
+            ScoreManager.instance.AddScore(1);
 
-        // Sumar score y mostrar popup
-        int points = 1; // o calcula según net/hoop más adelante
-        ScoreManager.instance.AddScore(points, transform.position);
+            HoopSpawner spawner = FindAnyObjectByType<HoopSpawner>();
+            if (spawner != null)
+                spawner.OnBallScored(this);
 
-        // Avisar al spawner
-        HoopSpawner spawner = FindAnyObjectByType<HoopSpawner>();
-        if (spawner != null)
-            spawner.OnBallScored(this);
+            // Permitir nuevo disparo
+            FindAnyObjectByType<BallShooter>().canShoot = true;
+        }
     }
-
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Ball"))
+        {
+            // Si la bola está dentro del aro
+            BallShooter shooter = other.GetComponent<BallShooter>();
+            if (shooter != null && other.attachedRigidbody.linearVelocity.magnitude < 0.1f)
+            {
+                // Reactivar disparo si está quieta dentro del aro
+                shooter.canShoot = true;
+            }
+        }
+    }
 }
+

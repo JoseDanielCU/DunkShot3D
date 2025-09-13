@@ -33,7 +33,7 @@ public class CameraFollowHoops : MonoBehaviour
         float distance = Vector3.Distance(current.position, next.position);
 
         Vector3 desiredPos = smoothedMiddle + offset;
-        desiredPos.z -= distance * 0.3f;
+        desiredPos.z -= distance * 0.5f;
 
         transform.position = Vector3.Lerp(transform.position, desiredPos, smoothSpeed * Time.deltaTime);
 
