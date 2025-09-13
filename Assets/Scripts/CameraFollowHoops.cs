@@ -13,8 +13,8 @@ public class CameraFollowHoops : MonoBehaviour
     public float extraPadding = 2f;
 
     [Header("Ajustes Manuales")]
-    public Vector3 offset = new Vector3(0, 2, -10);
-    public Vector3 rotationOffset = Vector3.zero;
+    public Vector3 offset = new Vector3(0, 5, -15); 
+    public Vector3 rotationOffset = new Vector3(15, 0, 0);
 
     private Vector3 smoothedMiddle;
 
@@ -33,14 +33,14 @@ public class CameraFollowHoops : MonoBehaviour
         float distance = Vector3.Distance(current.position, next.position);
 
         Vector3 desiredPos = smoothedMiddle + offset;
-        desiredPos.z -= distance * 0.5f;
+        desiredPos.z -= distance * 0.3f;
 
         transform.position = Vector3.Lerp(transform.position, desiredPos, smoothSpeed * Time.deltaTime);
 
         transform.LookAt(smoothedMiddle);
         transform.rotation *= Quaternion.Euler(rotationOffset);
 
-        float targetFOV = Mathf.Clamp(distance * 10f + extraPadding, 40f, 80f);
+        float targetFOV = Mathf.Clamp(distance * 8f + extraPadding, 50f, 70f);
         cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, targetFOV, smoothSpeed * Time.deltaTime);
     }
 }

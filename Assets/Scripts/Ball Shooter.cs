@@ -11,12 +11,12 @@ public class BallShooter : MonoBehaviour
     private bool isDragging = false;
 
     [Header("Disparo")]
-    public float forceMultiplier = 0.05f;
-    public float maxForce = 15f;
+    public float forceMultiplier = 0.15f;
+    public float maxForce = 20f;
 
     [Header("Trayectoria")]
     public LineRenderer lineRenderer;
-    public int trajectoryPoints = 30;
+    public int trajectoryPoints = 40;
     public float timeStep = 0.1f;
 
     [Header("Referencia de Cámara")]
@@ -129,6 +129,7 @@ public class BallShooter : MonoBehaviour
         Vector3 screenDir = new Vector3(dragVector.x, dragVector.y, 0f).normalized;
         Vector3 worldDir = cam.transform.TransformDirection(screenDir);
         worldDir.z = Mathf.Abs(worldDir.z);
+        worldDir.y += 0.2f;
 
         float dragDistance = dragVector.magnitude * forceMultiplier;
         float force = Mathf.Clamp(dragDistance, 0, maxForce);
