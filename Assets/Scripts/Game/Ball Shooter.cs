@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEngine.InputSystem; 
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
 public class BallShooter : MonoBehaviour
@@ -11,30 +11,35 @@ public class BallShooter : MonoBehaviour
     private bool isDragging = false;
 
     [Header("Disparo")]
-    public float forceMultiplier = 0.05f;
-    public float maxForce = 15f;
+    public float forceMultiplier = 0.15f;
+    public float maxForce = 20f;
 
     [Header("Trayectoria")]
     public LineRenderer lineRenderer;
-    public int trajectoryPoints = 30;
+    public int trajectoryPoints = 40;
     public float timeStep = 0.1f;
 
     [Header("Referencia de Cámara")]
     public Camera cam;
 
+    [Header("Indicador de impacto")]
+    public GameObject impactPointPrefab;
+    private GameObject impactPointInstance;
+
+    [Header("Raycast settings")]
+    public LayerMask collisionMask;
+
+    // Nueva bandera
+    public bool canShoot = true;
+    private bool insideHoop = false;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
 
         if (cam == null)
-        {
             cam = Camera.main;
-            if (cam == null)
-            {
-                Debug.LogError("No hay cámara asignada en BallShooter y tampoco se encontró 'MainCamera'.");
-            }
-        }
 
+        // LineRenderer configuración
         if (lineRenderer == null)
         {
             lineRenderer = gameObject.AddComponent<LineRenderer>();
@@ -45,12 +50,23 @@ public class BallShooter : MonoBehaviour
             lineRenderer.startColor = Color.yellow;
             lineRenderer.endColor = Color.red;
         }
-
         lineRenderer.enabled = false;
+
+        // Crear instancia del punto de impacto
+        if (impactPointPrefab != null)
+        {
+            impactPointInstance = Instantiate(impactPointPrefab);
+            impactPointInstance.SetActive(false);
+        }
     }
 
     private void Update()
     {
+        if (PauseMenu.instance != null && PauseMenu.instance.isPaused)
+            return;
+
+        if (!canShoot) return; // 🚫 Si no puedes disparar, ignora input
+
         // Mouse / Touch press
         if ((Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame) ||
             (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame))
@@ -98,12 +114,38 @@ public class BallShooter : MonoBehaviour
         Vector3 velocity = GetLaunchVelocity();
         lineRenderer.enabled = true;
 
+        Vector3 currentPos = transform.position;
+        Vector3 currentVelocity = velocity;
+
         for (int i = 0; i < trajectoryPoints; i++)
         {
-            float t = i * timeStep;
-            Vector3 point = transform.position + velocity * t;
-            point.y += Physics.gravity.y * 0.5f * t * t;
-            lineRenderer.SetPosition(i, point);
+            float t = timeStep;
+            Vector3 nextPos = currentPos + currentVelocity * t;
+            nextPos.y += Physics.gravity.y * 0.5f * t * t;
+
+            // 🔹 Lanzamos raycast entre currentPos y nextPos
+            Vector3 dir = (nextPos - currentPos).normalized;
+            float dist = (nextPos - currentPos).magnitude;
+
+            if (Physics.Raycast(currentPos, dir, out RaycastHit hit, dist, collisionMask))
+            {
+                // Dibujamos hasta el punto de impacto
+                lineRenderer.positionCount = i + 2;
+                lineRenderer.SetPosition(i, currentPos);
+                lineRenderer.SetPosition(i + 1, hit.point);
+
+                // Dibujar un "gizmo" en el impacto (opcional)
+                Debug.DrawRay(hit.point, Vector3.up * 0.3f, Color.red, 0.1f);
+
+                return; // detener dibujo, ya hubo impacto
+            }
+
+            // Si no hubo impacto, seguir dibujando
+            lineRenderer.SetPosition(i, currentPos);
+
+            // Actualizar posición y velocidad
+            currentPos = nextPos;
+            currentVelocity.y += Physics.gravity.y * t;
         }
     }
 
@@ -113,6 +155,8 @@ public class BallShooter : MonoBehaviour
         rb.linearVelocity = Vector3.zero;
         rb.isKinematic = false;
         rb.AddForce(velocity, ForceMode.Impulse);
+
+        canShoot = false; //Bloquear nuevos disparos
     }
 
     private Vector3 GetLaunchVelocity()
@@ -125,10 +169,10 @@ public class BallShooter : MonoBehaviour
 
         Vector3 dragVector = startDragPos - endDragPos;
 
-        // Convertirlo a dirección en el mundo
         Vector3 screenDir = new Vector3(dragVector.x, dragVector.y, 0f).normalized;
         Vector3 worldDir = cam.transform.TransformDirection(screenDir);
         worldDir.z = Mathf.Abs(worldDir.z);
+        worldDir.y += 0.2f;
 
         float dragDistance = dragVector.magnitude * forceMultiplier;
         float force = Mathf.Clamp(dragDistance, 0, maxForce);
