@@ -32,6 +32,7 @@ public class BallShooter : MonoBehaviour
     // Nueva bandera
     public bool canShoot = true;
     private bool insideHoop = false;
+    
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -43,13 +44,13 @@ public class BallShooter : MonoBehaviour
         if (lineRenderer == null)
         {
             lineRenderer = gameObject.AddComponent<LineRenderer>();
-            lineRenderer.positionCount = trajectoryPoints;
             lineRenderer.startWidth = 0.05f;
             lineRenderer.endWidth = 0.05f;
             lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
             lineRenderer.startColor = Color.yellow;
             lineRenderer.endColor = Color.red;
         }
+        lineRenderer.positionCount = trajectoryPoints;
         lineRenderer.enabled = false;
 
         // Crear instancia del punto de impacto
@@ -141,12 +142,18 @@ public class BallShooter : MonoBehaviour
             }
 
             // Si no hubo impacto, seguir dibujando
-            lineRenderer.SetPosition(i, currentPos);
+            if (i < lineRenderer.positionCount)
+            {
+                lineRenderer.SetPosition(i, currentPos);
+            }
 
             // Actualizar posición y velocidad
             currentPos = nextPos;
             currentVelocity.y += Physics.gravity.y * t;
         }
+
+        // Restablecer el número de puntos al máximo si no hubo colisión
+        lineRenderer.positionCount = trajectoryPoints;
     }
 
     private void Shoot()
