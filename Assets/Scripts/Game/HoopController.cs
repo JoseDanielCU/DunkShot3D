@@ -7,11 +7,6 @@ public class HoopController : MonoBehaviour
     public AudioClip rimHitSound;
     public AudioClip[] scoreSounds;
 
-    [Header("Wave")]
-    public Material waveMaterial;
-    private float waveTimer = 0f;
-    private bool waveActive = false;
-
     [Header("Disparo")]
     public Transform shootPoint;
     public float shootForce = 10f;
@@ -30,11 +25,6 @@ public class HoopController : MonoBehaviour
     // 🔹 Método para marcar el aro inicial como ya anotado
     public void SetAsAlreadyScored() => scored = true;
 
-    public void TriggerWave()
-    {
-        waveTimer = 0f;
-        waveActive = true;
-    }
 
     public void ShootBall()
     {
@@ -77,9 +67,6 @@ public class HoopController : MonoBehaviour
             // ✅ Sumar puntaje
             ScoreManager.instance.AddScore(1);
 
-            // ✅ Efecto visual
-            TriggerWave();
-
             // ✅ Notificar al spawner
             HoopSpawner spawner = FindAnyObjectByType<HoopSpawner>();
             if (spawner != null)
@@ -103,17 +90,7 @@ public class HoopController : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        if (!waveActive) return;
 
-        waveTimer += Time.deltaTime;
-        waveMaterial.SetFloat("_WaveTime", waveTimer);
-
-        // Desactivar efecto después de un tiempo
-        if (waveTimer > 2f)
-            waveActive = false;
-    }
 
     private void OnTriggerStay(Collider other)
     {

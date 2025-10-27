@@ -1,25 +1,36 @@
-using UnityEngine;
+﻿using UnityEngine;
 
+[RequireComponent(typeof(TrailRenderer))]
 public class BallTrailController : MonoBehaviour
 {
-    private ParticleSystem trailParticles;
+    private TrailRenderer trail;
+    public bool isPreview = false; // 🔹 Nuevo flag para modo preview
 
     private void Awake()
     {
-        trailParticles = GetComponentInChildren<ParticleSystem>(true);
-        if (trailParticles != null)
-            trailParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        trail = GetComponent<TrailRenderer>();
     }
 
     public void PlayTrail()
     {
-        if (trailParticles != null && !trailParticles.isPlaying)
-            trailParticles.Play();
+        if (trail == null) return;
+        trail.emitting = true;
     }
 
     public void StopTrail()
     {
-        if (trailParticles != null && trailParticles.isPlaying)
-            trailParticles.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        if (trail == null) return;
+        trail.emitting = false;
+        trail.Clear();
+    }
+
+    private void Update()
+    {
+        if (isPreview)
+        {
+            // 🔹 Hace que el trail se actualice aunque el objeto esté quieto
+            trail.time = 2f;
+            trail.emitting = true;
+        }
     }
 }

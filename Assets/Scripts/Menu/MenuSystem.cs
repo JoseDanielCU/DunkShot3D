@@ -11,6 +11,10 @@ public class MenusSystem : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+    public void MenuCustom()
+        {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+    }
     public void Salir()
     {
         Debug.Log("Saliendo del juego...");

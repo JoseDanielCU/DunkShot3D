@@ -85,6 +85,7 @@ public class BallShooter : MonoBehaviour
     {
         if (!canShoot) return;
 
+
         // 📍 Inicio del arrastre
         if ((Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame) ||
             (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.wasPressedThisFrame))
