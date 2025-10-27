@@ -9,17 +9,23 @@ public class DifficultyManager : MonoBehaviour
     public Material skyboxMaterial;
 
     [Header("Colores por dificultad")]
-    public Color easyTop = new Color(0.2f, 0.5f, 1f);
-    public Color easyBottom = new Color(0.8f, 0.9f, 1f);
+    public Color easyTop = new Color(0.3f, 0.8f, 0.4f);       // Verde fresco
+    public Color easyBottom = new Color(0.6f, 1f, 0.7f);
 
-    public Color mediumTop = new Color(1f, 0.7f, 0.3f);
-    public Color mediumBottom = new Color(1f, 0.9f, 0.6f);
+    public Color mediumTop = new Color(1f, 0.8f, 0.2f);       // Amarillo cálido
+    public Color mediumBottom = new Color(1f, 0.95f, 0.6f);
 
-    public Color hardTop = new Color(0.8f, 0.2f, 0.2f);
-    public Color hardBottom = new Color(0.4f, 0.05f, 0.05f);
+    public Color hardTop = new Color(1f, 0.4f, 0.3f);         // Rojo anaranjado
+    public Color hardBottom = new Color(0.5f, 0.15f, 0.1f);
 
-    public Color extremeTop = new Color(0.05f, 0.05f, 0.05f);
-    public Color extremeBottom = new Color(0.2f, 0.0f, 0.2f);
+    public Color veryHardTop = new Color(0.7f, 0.1f, 0.5f);   // Fucsia / violeta
+    public Color veryHardBottom = new Color(0.3f, 0.05f, 0.25f);
+
+    public Color chaosTop = new Color(0.3f, 0.0f, 0.5f);      // Púrpura oscuro
+    public Color chaosBottom = new Color(0.1f, 0.0f, 0.2f);
+
+    public Color nightmareTop = new Color(0.0f, 0.0f, 0.0f);  // Negro total
+    public Color nightmareBottom = new Color(0.05f, 0.05f, 0.05f);
 
     private Coroutine colorTransition;
 
@@ -32,26 +38,42 @@ public class DifficultyManager : MonoBehaviour
     public Vector2 diff1_ZRange = new Vector2(4f, 5f);
 
     [Header("Dificultad 2 - Media")]
-    public Vector2 diff2_XRange = new Vector2(-2.5f, 2.5f);
-    public Vector2 diff2_YRange = new Vector2(1f, 3.5f);
-    public Vector2 diff2_ZRange = new Vector2(5f, 7f);
+    public Vector2 diff2_XRange = new Vector2(-2f, 2f);
+    public Vector2 diff2_YRange = new Vector2(1f, 3f);
+    public Vector2 diff2_ZRange = new Vector2(5f, 6.5f);
 
-    [Header("Dificultad 3 - Con Movimiento")]
+    [Header("Dificultad 3 - Movimiento Suave")]
     public Vector2 diff3_XRange = new Vector2(-2.5f, 2.5f);
     public Vector2 diff3_YRange = new Vector2(1f, 3.5f);
     public Vector2 diff3_ZRange = new Vector2(5f, 7f);
-    public bool diff3_EnableMovement = true;
     public float diff3_MoveSpeed = 2f;
     public float diff3_MoveRange = 2f;
 
-    [Header("Dificultad 4 - Con Obstáculos")]
+    [Header("Dificultad 4 - Movimiento + Rápido")]
     public Vector2 diff4_XRange = new Vector2(-3f, 3f);
-    public Vector2 diff4_YRange = new Vector2(0.5f, 4f);
-    public Vector2 diff4_ZRange = new Vector2(6f, 8f);
-    public bool diff4_EnableMovement = true;
-    public float diff4_MoveSpeed = 2.5f;
-    public float diff4_MoveRange = 2.5f;
+    public Vector2 diff4_YRange = new Vector2(0.8f, 3.8f);
+    public Vector2 diff4_ZRange = new Vector2(5.5f, 7.5f);
+    public float diff4_MoveSpeed = 3f;
+    public float diff4_MoveRange = 3f;
+
+    [Header("Dificultad 5 - Obstáculos")]
+    public Vector2 diff5_XRange = new Vector2(-3f, 3f);
+    public Vector2 diff5_YRange = new Vector2(0.5f, 4f);
+    public Vector2 diff5_ZRange = new Vector2(6f, 8f);
+    public float diff5_MoveSpeed = 2f;
+    public float diff5_MoveRange = 2f;
+
+    [Header("Dificultad 6 - Caos total 😈")]
+    public Vector2 diff6_XRange = new Vector2(-3.5f, 3.5f);
+    public Vector2 diff6_YRange = new Vector2(0.3f, 4.5f);
+    public Vector2 diff6_ZRange = new Vector2(6.5f, 8.5f);
+    public float diff6_MoveSpeed = 3f;
+    public float diff6_MoveRange = 3f;
+
+    [Header("Obstáculos")]
     public GameObject obstaclePrefab;
+    [Header("Material del Piso")]
+    public Material floorMaterial;
 
     private void Awake()
     {
@@ -64,57 +86,70 @@ public class DifficultyManager : MonoBehaviour
     private void Start()
     {
         currentDifficulty = 1;
-        // Establece colores iniciales del cielo
-        if (skyboxMaterial != null)
-        {
-            skyboxMaterial.SetColor("_TopColor", easyTop);
-            skyboxMaterial.SetColor("_BottomColor", easyBottom);
-        }
+        ApplyDifficultyColors(1); // ✅ Forzar color inicial verde
     }
 
-    /// <summary>
-    /// Cambia la dificultad según el puntaje actual
-    /// 0–9 → Nivel 1
-    /// 10–24 → Nivel 2
-    /// 25–54 → Nivel 3
-    /// 55+ → Nivel 4
-    /// </summary>
     public void CheckDifficultyIncrease()
     {
         int score = ScoreManager.instance.GetScore();
         int newDifficulty = 1;
 
-        if (score >= 55) newDifficulty = 4;
-        else if (score >= 25) newDifficulty = 3;
+        if (score >= 100) newDifficulty = 6;
+        else if (score >= 60) newDifficulty = 5;
+        else if (score >= 40) newDifficulty = 4;
+        else if (score >= 20) newDifficulty = 3;
         else if (score >= 10) newDifficulty = 2;
-
-        newDifficulty = Mathf.Clamp(newDifficulty, 1, 4);
 
         if (newDifficulty != currentDifficulty)
         {
             currentDifficulty = newDifficulty;
-            Debug.Log($"¡Dificultad cambiada a nivel {currentDifficulty}! (Puntaje: {score})");
-
-            // 🔥 Cambiar los colores del cielo al subir de nivel
-            switch (currentDifficulty)
-            {
-                case 1:
-                    UpdateSkyboxColors(easyTop, easyBottom);
-                    break;
-                case 2:
-                    UpdateSkyboxColors(mediumTop, mediumBottom);
-                    break;
-                case 3:
-                    UpdateSkyboxColors(hardTop, hardBottom);
-                    break;
-                case 4:
-                    UpdateSkyboxColors(extremeTop, extremeBottom);
-                    break;
-            }
+            Debug.Log($"🔥 Dificultad aumentada a nivel {currentDifficulty} (Puntaje: {score})");
+            UpdateSkyboxByDifficulty();
         }
     }
 
-    // 🎨 Transición suave de colores del skybox
+    private void UpdateFloorColor(Color color)
+    {
+        if (floorMaterial != null)
+            floorMaterial.SetColor("_BaseColor", color);
+    }
+
+    private void UpdateSkyboxByDifficulty()
+    {
+        ApplyDifficultyColors(currentDifficulty);
+    }
+
+    private void ApplyDifficultyColors(int difficulty)
+    {
+        Color top, bottom, floorColor;
+
+        switch (difficulty)
+        {
+            case 1:
+                top = easyTop; bottom = easyBottom; floorColor = new Color(0.5f, 1f, 0.5f);
+                break;
+            case 2:
+                top = mediumTop; bottom = mediumBottom; floorColor = new Color(1f, 0.9f, 0.5f);
+                break;
+            case 3:
+                top = hardTop; bottom = hardBottom; floorColor = new Color(1f, 0.5f, 0.4f);
+                break;
+            case 4:
+                top = veryHardTop; bottom = veryHardBottom; floorColor = new Color(0.6f, 0.2f, 0.6f);
+                break;
+            case 5:
+                top = chaosTop; bottom = chaosBottom; floorColor = new Color(0.3f, 0.05f, 0.4f);
+                break;
+            case 6:
+            default:
+                top = nightmareTop; bottom = nightmareBottom; floorColor = new Color(0.1f, 0.1f, 0.1f);
+                break;
+        }
+
+        UpdateSkyboxColors(top, bottom);
+        UpdateFloorColor(floorColor);
+    }
+
     private void UpdateSkyboxColors(Color top, Color bottom)
     {
         if (skyboxMaterial == null) return;
@@ -133,40 +168,26 @@ public class DifficultyManager : MonoBehaviour
         float t = 0f;
         while (t < 1f)
         {
-            t += Time.deltaTime / 2f; // duración: 2 segundos
+            t += Time.deltaTime / 2f;
             skyboxMaterial.SetColor("_TopColor", Color.Lerp(currentTop, targetTop, t));
             skyboxMaterial.SetColor("_BottomColor", Color.Lerp(currentBottom, targetBottom, t));
             yield return null;
         }
     }
 
-    // 🏀 Posición del aro según dificultad
     public Vector3 GetRandomHoopPosition(Vector3 currentHoopPos)
     {
         Vector2 xRange, yRange, zRange;
-
         switch (currentDifficulty)
         {
-            case 1:
-                xRange = diff1_XRange;
-                yRange = diff1_YRange;
-                zRange = diff1_ZRange;
-                break;
-            case 2:
-                xRange = diff2_XRange;
-                yRange = diff2_YRange;
-                zRange = diff2_ZRange;
-                break;
-            case 3:
-                xRange = diff3_XRange;
-                yRange = diff3_YRange;
-                zRange = diff3_ZRange;
-                break;
-            case 4:
+            case 1: xRange = diff1_XRange; yRange = diff1_YRange; zRange = diff1_ZRange; break;
+            case 2: xRange = diff2_XRange; yRange = diff2_YRange; zRange = diff2_ZRange; break;
+            case 3: xRange = diff3_XRange; yRange = diff3_YRange; zRange = diff3_ZRange; break;
+            case 4: xRange = diff4_XRange; yRange = diff4_YRange; zRange = diff4_ZRange; break;
+            case 5: xRange = diff5_XRange; yRange = diff5_YRange; zRange = diff5_ZRange; break;
+            case 6:
             default:
-                xRange = diff4_XRange;
-                yRange = diff4_YRange;
-                zRange = diff4_ZRange;
+                xRange = diff6_XRange; yRange = diff6_YRange; zRange = diff6_ZRange;
                 break;
         }
 
@@ -177,44 +198,51 @@ public class DifficultyManager : MonoBehaviour
         );
     }
 
-    public bool ShouldHoopMove()
-    {
-        return (currentDifficulty >= 3);
-    }
+    public bool ShouldHoopMove() => currentDifficulty >= 3;
 
     public float GetMoveSpeed()
     {
-        if (currentDifficulty == 3)
-            return diff3_MoveSpeed;
-        else if (currentDifficulty >= 4)
-            return diff4_MoveSpeed;
-        return 0f;
+        switch (currentDifficulty)
+        {
+            case 3: return diff3_MoveSpeed;
+            case 4: return diff4_MoveSpeed;
+            case 5: return diff5_MoveSpeed;
+            case 6: return diff6_MoveSpeed;
+            default: return 0f;
+        }
     }
 
     public float GetMoveRange()
     {
-        if (currentDifficulty == 3)
-            return diff3_MoveRange;
-        else if (currentDifficulty >= 4)
-            return diff4_MoveRange;
-        return 0f;
+        switch (currentDifficulty)
+        {
+            case 3: return diff3_MoveRange;
+            case 4: return diff4_MoveRange;
+            case 5: return diff5_MoveRange;
+            case 6: return diff6_MoveRange;
+            default: return 0f;
+        }
     }
 
     public bool ShouldSpawnObstacle()
     {
-        if (currentDifficulty < 4 || obstaclePrefab == null)
+        if (obstaclePrefab == null || currentDifficulty < 4)
             return false;
 
-        return Random.value > 0.5f; // 50% de probabilidad en nivel 4
+        float probability = 0f;
+        switch (currentDifficulty)
+        {
+            case 4: probability = 0.3f; break;
+            case 5: probability = 0.55f; break;
+            case 6: probability = 0.8f; break;
+        }
+
+        return Random.value < probability;
     }
 
     public void ResetDifficulty()
     {
         currentDifficulty = 1;
-        if (skyboxMaterial != null)
-        {
-            skyboxMaterial.SetColor("_TopColor", easyTop);
-            skyboxMaterial.SetColor("_BottomColor", easyBottom);
-        }
+        ApplyDifficultyColors(1); // ✅ Ahora también reinicia piso + cielo al verde
     }
 }
