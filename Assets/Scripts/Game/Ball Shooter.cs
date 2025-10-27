@@ -83,6 +83,8 @@ public class BallShooter : MonoBehaviour
 
     private void Update()
     {
+        if (!canShoot || (PauseMenu.instance != null && PauseMenu.instance.isPaused))
+            return;
         if (!canShoot) return;
 
 
