@@ -54,7 +54,16 @@ public class BallCustomizerUI : MonoBehaviour
             if (trailCtrl != null)
                 trailCtrl.isPreview = true;
         }
+
+        // 🔹 Intentar cargar el último preset guardado
+        if (PlayerPrefs.HasKey("LastPreset"))
+        {
+            string lastPreset = PlayerPrefs.GetString("LastPreset");
+            if (!string.IsNullOrEmpty(lastPreset))
+                LoadPreset(lastPreset);
+        }
     }
+
 
 
     private void Update()
@@ -165,8 +174,14 @@ public class BallCustomizerUI : MonoBehaviour
         UpdateTrail();
 
         presetNameInput.text = name;
+
+        // 🔹 Guardar el último preset en PlayerPrefs
+        PlayerPrefs.SetString("LastPreset", name);
+        PlayerPrefs.Save();
+
         ShowMessage($"🎨 Preset cargado: {name}");
     }
+
 
     public void CopyPresetName()
     {
