@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7858708602232591465}
   - component: {fileID: 1368540835279825061}
   - component: {fileID: 1984281014106871829}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (2)
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 2568633266904899172}
   - component: {fileID: 5553546473817683917}
   - component: {fileID: 62697705626627194}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (24)
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -238,7 +238,7 @@ GameObject:
   - component: {fileID: 4984137562004977609}
   - component: {fileID: 8218693913839638849}
   - component: {fileID: 7498933051366997909}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (19)
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -351,7 +351,7 @@ GameObject:
   - component: {fileID: 3971588827447495592}
   - component: {fileID: 4255564308484847912}
   - component: {fileID: 6197973464316925732}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (30)
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -464,7 +464,7 @@ GameObject:
   - component: {fileID: 7913236583429956164}
   - component: {fileID: 7977885661255567899}
   - component: {fileID: 7444714138809457532}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (13)
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -577,7 +577,7 @@ GameObject:
   - component: {fileID: 6718784845728724610}
   - component: {fileID: 6137708142219112577}
   - component: {fileID: 9018588465672883052}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (27)
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -690,7 +690,7 @@ GameObject:
   - component: {fileID: 8748263094950765206}
   - component: {fileID: 1344221782375314334}
   - component: {fileID: 8400409168584541239}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (18)
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -803,7 +803,7 @@ GameObject:
   - component: {fileID: 745687892890123566}
   - component: {fileID: 1152342783798059186}
   - component: {fileID: 5541669230827146610}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (1)
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -916,7 +916,7 @@ GameObject:
   - component: {fileID: 1873301356844076692}
   - component: {fileID: 8947839858494146834}
   - component: {fileID: 8345597421424370211}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (14)
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -1029,7 +1029,7 @@ GameObject:
   - component: {fileID: 589266174285764209}
   - component: {fileID: 8304896962162904782}
   - component: {fileID: 5678436360647105342}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (22)
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -1142,7 +1142,7 @@ GameObject:
   - component: {fileID: 8550473865843434818}
   - component: {fileID: 4982601916744578172}
   - component: {fileID: 7294716268222349788}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (20)
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -1255,7 +1255,7 @@ GameObject:
   - component: {fileID: 1040914745557194335}
   - component: {fileID: 7089090357737714271}
   - component: {fileID: 8603296531572468161}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (3)
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -1368,7 +1368,7 @@ GameObject:
   - component: {fileID: 5439178061338736176}
   - component: {fileID: 1377656396565525938}
   - component: {fileID: 2199504564308492457}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (26)
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -1481,7 +1481,7 @@ GameObject:
   - component: {fileID: 7596034639275834454}
   - component: {fileID: 5668818096131544353}
   - component: {fileID: 3001559529219574931}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (16)
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -1594,7 +1594,7 @@ GameObject:
   - component: {fileID: 3632431693225527289}
   - component: {fileID: 2475207169764183398}
   - component: {fileID: 8520014019055010154}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (17)
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -1707,7 +1707,7 @@ GameObject:
   - component: {fileID: 1939388546651746203}
   - component: {fileID: 4822204438973168211}
   - component: {fileID: 1284133297043690104}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (4)
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -1820,7 +1820,7 @@ GameObject:
   - component: {fileID: 1301674774165433020}
   - component: {fileID: 3336832020263904453}
   - component: {fileID: 1957207490811219524}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (23)
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -1933,7 +1933,7 @@ GameObject:
   - component: {fileID: 3212963818858301504}
   - component: {fileID: 62785080317569349}
   - component: {fileID: 3523701471138714821}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (11)
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -2046,7 +2046,7 @@ GameObject:
   - component: {fileID: 3044954153225512407}
   - component: {fileID: 6067192497660858062}
   - component: {fileID: 4815912862207655787}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (5)
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -2159,7 +2159,7 @@ GameObject:
   - component: {fileID: 1224361489051324687}
   - component: {fileID: 2279240510193027775}
   - component: {fileID: 8740716700544843592}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (31)
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -2272,7 +2272,7 @@ GameObject:
   - component: {fileID: 7324247656157438362}
   - component: {fileID: 3881160941787681135}
   - component: {fileID: 8153032683303900936}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (6)
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -2385,7 +2385,7 @@ GameObject:
   - component: {fileID: 67500533437455317}
   - component: {fileID: 7410245773303699093}
   - component: {fileID: 8570645006186487745}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (29)
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -2495,7 +2495,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5284493237364897056}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2529,7 +2529,7 @@ GameObject:
   - component: {fileID: 5999438070353238754}
   - component: {fileID: 8603736792973725067}
   - component: {fileID: 1720970151361416744}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (15)
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -2642,7 +2642,7 @@ GameObject:
   - component: {fileID: 8419313993276402661}
   - component: {fileID: 8704925540963273850}
   - component: {fileID: 7387148592029932471}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (8)
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -2755,7 +2755,7 @@ GameObject:
   - component: {fileID: 4276068228232919339}
   - component: {fileID: 2141197895743967856}
   - component: {fileID: 5141118100306621197}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (10)
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -2868,7 +2868,7 @@ GameObject:
   - component: {fileID: 92479629324627831}
   - component: {fileID: 828105566276029624}
   - component: {fileID: 5118477432128717466}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (7)
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -2978,7 +2978,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8159132145089922358}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RimCollider
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -3044,7 +3044,7 @@ GameObject:
   - component: {fileID: 275844597811234855}
   - component: {fileID: 7796087535134035997}
   - component: {fileID: 6139959326148952072}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (12)
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -3157,7 +3157,7 @@ GameObject:
   - component: {fileID: 5014420048546285778}
   - component: {fileID: 8709766915557704075}
   - component: {fileID: 8485556031568798322}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (21)
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -3270,7 +3270,7 @@ GameObject:
   - component: {fileID: 5914901018967381379}
   - component: {fileID: 3885703692545864206}
   - component: {fileID: 3850521425864547958}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (25)
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -3383,7 +3383,7 @@ GameObject:
   - component: {fileID: 3019946813261231517}
   - component: {fileID: 4304874369241766997}
   - component: {fileID: 6652729650566485652}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (28)
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -3496,7 +3496,7 @@ GameObject:
   - component: {fileID: 9087680362855170356}
   - component: {fileID: 1702341774617595156}
   - component: {fileID: 830482785734559956}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder (9)
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -3609,7 +3609,7 @@ GameObject:
   - component: {fileID: 340093140890716988}
   - component: {fileID: 1906094130772395451}
   - component: {fileID: 1431283726360418011}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cylinder
   m_TagString: Hoop
   m_Icon: {fileID: 0}
@@ -3784,11 +3784,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5e218807be2d09545a62691dd933465c, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5e218807be2d09545a62691dd933465c, type: 3}
       propertyPath: m_TagString
       value: Hoop
+      objectReference: {fileID: 0}
+    - target: {fileID: 5003563274206716603, guid: 5e218807be2d09545a62691dd933465c, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5003563274206716603, guid: 5e218807be2d09545a62691dd933465c, type: 3}
       propertyPath: m_TagString
@@ -3813,6 +3817,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5e218807be2d09545a62691dd933465c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4443690186548971371}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 5e218807be2d09545a62691dd933465c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1171234969109001665}
     - targetCorrespondingSourceObject: {fileID: 5003563274206716603, guid: 5e218807be2d09545a62691dd933465c, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6239078347422405755}
@@ -3861,6 +3868,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 673a1fe8cbfb566479dfc7882cf90665, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSource: {fileID: 0}
+  rimHitSound: {fileID: 8300000, guid: 8bf9293e557ba264f9066009ca40d17e, type: 3}
+  scoreSounds:
+  - {fileID: 8300000, guid: 7b6a601a0a423274e9af0ce22090e85f, type: 3}
+  - {fileID: 8300000, guid: 1b05649096c4bfa4b8bd6ac6de994434, type: 3}
+  waveMaterial: {fileID: 2100000, guid: 906a8c9291368104dbcee0f48cd8645d, type: 2}
   shootPoint: {fileID: 5284493237364897056}
   shootForce: 10
 --- !u!64 &2782541507634789544
@@ -3906,6 +3919,103 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.00521, y: 0.00521, z: 0.0010000004}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!82 &1171234969109001665
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5927680449150208541}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.8
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 2
+  MaxDistance: 15
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!4 &6415528692101943463 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5e218807be2d09545a62691dd933465c, type: 3}

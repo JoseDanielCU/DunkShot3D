@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Mat_Neon_Ball
-  m_Shader: {fileID: 4800000, guid: 508f85104c8558a4d9f679f6c5a987e9, type: 3}
+  m_Name: BallTrail
+  m_Shader: {fileID: 4800000, guid: 4e740158e098540438a7377e7bddcf05, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -96,24 +96,20 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _DstBlendAlpha: 0
+    - _EmissionIntensity: 2
     - _EnvironmentReflections: 1
-    - _FresnelPower: 2.16
+    - _Fade: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _Metallic: 0
-    - _NeonIntensity: 9.95
     - _OcclusionStrength: 1
     - _Parallax: 0.005
-    - _PulseAmount: 1
-    - _PulseSpeed: 5
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _RimIntensity: 15
-    - _RimPower: 3
-    - _RimThickness: 0.8
     - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
+    - _Softness: 0.5
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
@@ -122,15 +118,13 @@ Material:
     - _XRMotionVectorsPass: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 1, g: 0.2705882, b: 0, a: 1}
+    - _BaseColor: {r: 1, g: 0.5, b: 0, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _NeonColor: {r: 0.2509804, g: 0.8784314, b: 0.8156863, a: 1}
-    - _RimColor: {r: 0, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 1, g: 0.8, b: 0.2, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &5169771653338744982
+--- !u!114 &1209660990619278361
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

@@ -1,12 +1,30 @@
 using UnityEngine;
+using System.Collections;
 
 public class DifficultyManager : MonoBehaviour
 {
     public static DifficultyManager instance;
 
+    [Header("Referencias Visuales")]
+    public Material skyboxMaterial;
+
+    [Header("Colores por dificultad")]
+    public Color easyTop = new Color(0.2f, 0.5f, 1f);
+    public Color easyBottom = new Color(0.8f, 0.9f, 1f);
+
+    public Color mediumTop = new Color(1f, 0.7f, 0.3f);
+    public Color mediumBottom = new Color(1f, 0.9f, 0.6f);
+
+    public Color hardTop = new Color(0.8f, 0.2f, 0.2f);
+    public Color hardBottom = new Color(0.4f, 0.05f, 0.05f);
+
+    public Color extremeTop = new Color(0.05f, 0.05f, 0.05f);
+    public Color extremeBottom = new Color(0.2f, 0.0f, 0.2f);
+
+    private Coroutine colorTransition;
+
     [Header("Configuración de Dificultad")]
     public int currentDifficulty = 1;
-    public int scoresPerLevel = 4; // Puntos necesarios para subir de nivel
 
     [Header("Dificultad 1 - Fácil")]
     public Vector2 diff1_XRange = new Vector2(-1f, 1f);
@@ -33,7 +51,7 @@ public class DifficultyManager : MonoBehaviour
     public bool diff4_EnableMovement = true;
     public float diff4_MoveSpeed = 2.5f;
     public float diff4_MoveRange = 2.5f;
-    public GameObject obstaclePrefab; // Prefab del obstáculo
+    public GameObject obstaclePrefab;
 
     private void Awake()
     {
@@ -46,21 +64,83 @@ public class DifficultyManager : MonoBehaviour
     private void Start()
     {
         currentDifficulty = 1;
-    }
-
-    public void CheckDifficultyIncrease()
-    {
-        int currentScore = ScoreManager.instance.GetScore();
-        int targetDifficulty = (currentScore / scoresPerLevel) + 1;
-        targetDifficulty = Mathf.Clamp(targetDifficulty, 1, 4);
-
-        if (targetDifficulty > currentDifficulty)
+        // Establece colores iniciales del cielo
+        if (skyboxMaterial != null)
         {
-            currentDifficulty = targetDifficulty;
-            Debug.Log($"¡Dificultad aumentada a nivel {currentDifficulty}! (Score: {currentScore})");
+            skyboxMaterial.SetColor("_TopColor", easyTop);
+            skyboxMaterial.SetColor("_BottomColor", easyBottom);
         }
     }
 
+    /// <summary>
+    /// Cambia la dificultad según el puntaje actual
+    /// 0–9 → Nivel 1
+    /// 10–24 → Nivel 2
+    /// 25–54 → Nivel 3
+    /// 55+ → Nivel 4
+    /// </summary>
+    public void CheckDifficultyIncrease()
+    {
+        int score = ScoreManager.instance.GetScore();
+        int newDifficulty = 1;
+
+        if (score >= 55) newDifficulty = 4;
+        else if (score >= 25) newDifficulty = 3;
+        else if (score >= 10) newDifficulty = 2;
+
+        newDifficulty = Mathf.Clamp(newDifficulty, 1, 4);
+
+        if (newDifficulty != currentDifficulty)
+        {
+            currentDifficulty = newDifficulty;
+            Debug.Log($"¡Dificultad cambiada a nivel {currentDifficulty}! (Puntaje: {score})");
+
+            // 🔥 Cambiar los colores del cielo al subir de nivel
+            switch (currentDifficulty)
+            {
+                case 1:
+                    UpdateSkyboxColors(easyTop, easyBottom);
+                    break;
+                case 2:
+                    UpdateSkyboxColors(mediumTop, mediumBottom);
+                    break;
+                case 3:
+                    UpdateSkyboxColors(hardTop, hardBottom);
+                    break;
+                case 4:
+                    UpdateSkyboxColors(extremeTop, extremeBottom);
+                    break;
+            }
+        }
+    }
+
+    // 🎨 Transición suave de colores del skybox
+    private void UpdateSkyboxColors(Color top, Color bottom)
+    {
+        if (skyboxMaterial == null) return;
+
+        if (colorTransition != null)
+            StopCoroutine(colorTransition);
+
+        colorTransition = StartCoroutine(LerpSkybox(top, bottom));
+    }
+
+    private IEnumerator LerpSkybox(Color targetTop, Color targetBottom)
+    {
+        Color currentTop = skyboxMaterial.GetColor("_TopColor");
+        Color currentBottom = skyboxMaterial.GetColor("_BottomColor");
+
+        float t = 0f;
+        while (t < 1f)
+        {
+            t += Time.deltaTime / 2f; // duración: 2 segundos
+            skyboxMaterial.SetColor("_TopColor", Color.Lerp(currentTop, targetTop, t));
+            skyboxMaterial.SetColor("_BottomColor", Color.Lerp(currentBottom, targetBottom, t));
+            yield return null;
+        }
+    }
+
+    // 🏀 Posición del aro según dificultad
     public Vector3 GetRandomHoopPosition(Vector3 currentHoopPos)
     {
         Vector2 xRange, yRange, zRange;
@@ -122,16 +202,19 @@ public class DifficultyManager : MonoBehaviour
 
     public bool ShouldSpawnObstacle()
     {
-        // Solo spawnar obstáculos si estamos en dificultad 4 o superior
         if (currentDifficulty < 4 || obstaclePrefab == null)
             return false;
-        
-        // En dificultad 4, 50% de probabilidad de obstáculo
-        return Random.value > 0.5f;
+
+        return Random.value > 0.5f; // 50% de probabilidad en nivel 4
     }
 
     public void ResetDifficulty()
     {
         currentDifficulty = 1;
+        if (skyboxMaterial != null)
+        {
+            skyboxMaterial.SetColor("_TopColor", easyTop);
+            skyboxMaterial.SetColor("_BottomColor", easyBottom);
+        }
     }
 }
