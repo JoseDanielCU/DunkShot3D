@@ -36,9 +36,6 @@ public class BallShooter : MonoBehaviour
     [Header("📷 Referencia de Cámara")]
     public Camera cam;
 
-    [Header("🎯 Indicador de impacto")]
-    public GameObject impactPointPrefab;
-    private GameObject impactPointInstance;
 
     [Header("🔍 Raycast settings")]
     public LayerMask collisionMask;
@@ -82,12 +79,6 @@ public class BallShooter : MonoBehaviour
 
         lineRenderer.enabled = false;
 
-        // 🎯 Crear punto de impacto
-        if (impactPointPrefab != null)
-        {
-            impactPointInstance = Instantiate(impactPointPrefab);
-            impactPointInstance.SetActive(false);
-        }
     }
 
     private void Update()
@@ -151,7 +142,6 @@ public class BallShooter : MonoBehaviour
         if (velocity.sqrMagnitude < 0.001f)
         {
             lineRenderer.enabled = false;
-            if (impactPointInstance != null) impactPointInstance.SetActive(false);
             return;
         }
 
@@ -186,14 +176,6 @@ public class BallShooter : MonoBehaviour
 
             currentPos = nextPos;
             currentVelocity += gravity * timeStep;
-        }
-
-        if (impactPointInstance != null)
-        {
-            impactPointInstance.SetActive(true);
-            impactPointInstance.transform.position = hitDetected
-                ? hitPoint + Vector3.up * 0.05f
-                : lineRenderer.GetPosition(lineRenderer.positionCount - 1);
         }
     }
 
