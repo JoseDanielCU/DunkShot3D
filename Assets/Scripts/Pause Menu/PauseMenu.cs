@@ -28,6 +28,13 @@ public class PauseMenu : MonoBehaviour
     }
     public void Pause()
     {
+
+        BallShooter shooter = FindFirstObjectByType<BallShooter>();
+        if (shooter != null)
+        {
+            if (shooter.TryGetComponent(out AudioSource src) && src.isPlaying)
+                src.Stop();
+        }
         pauseMenuUI.SetActive(true);
         isPaused = true;
 

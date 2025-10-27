@@ -8,10 +8,10 @@ public class ScoreManager : MonoBehaviour
     public TMP_Text highScoreText;
 
     [Header("Popups")]
-    public GameObject pointPopupPrefab; // prefab de +1 / +2
-    public Canvas canvas;               // canvas donde aparecerán los popups
+    public GameObject pointPopupPrefab;
+    public Canvas canvas;
 
-    private int score = -1;
+    private int score = 0;
     private int highScore = 0;
 
     private const string HighScoreKey = "HighScore";
@@ -36,7 +36,6 @@ public class ScoreManager : MonoBehaviour
         score += value;
         UpdateUI();
 
-        // Revisar High Score
         if (score > highScore)
         {
             highScore = score;
@@ -44,24 +43,27 @@ public class ScoreManager : MonoBehaviour
             PlayerPrefs.Save();
         }
 
-        // Mostrar popup si se asignó prefab
         if (pointPopupPrefab != null && canvas != null)
         {
             GameObject popup = Instantiate(pointPopupPrefab, canvas.transform);
             popup.GetComponent<TextMeshProUGUI>().text = "+" + value;
 
-            // Si se pasa una posición en mundo, convertir a pantalla
             if (worldPosition != default)
                 popup.transform.position = Camera.main.WorldToScreenPoint(worldPosition);
             else
-                popup.transform.position = canvas.transform.position; // centro por defecto
+                popup.transform.position = canvas.transform.position;
         }
     }
 
     public void ResetScore()
     {
-        score = -1;
+        score = 0;
         UpdateUI();
+    }
+
+    public int GetScore()
+    {
+        return score;
     }
 
     private void UpdateUI()
